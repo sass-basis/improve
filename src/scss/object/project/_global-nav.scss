@@ -1,0 +1,40 @@
+.p-global-nav {
+	&__menus {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+	}
+
+	&__menu {
+		display: inline-block;
+		margin: 0;
+		padding: 0 $bs-base-line-height;
+
+		> a {
+			position: relative;
+			display: block;
+			padding: 0 0 6px;
+			@include bs-font-size-line-height(1.4rem);
+			text-decoration: none;
+
+			&::after {
+				content: '';
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				transform: translateX(-50%);
+				height: 1px;
+				width: 0;
+				background-color: $main-color;
+				transition: width $bs-transition-duration $bs-transition-function-timing;
+			}
+
+			@include bs-hover() {
+				&::after {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
