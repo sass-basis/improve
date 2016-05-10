@@ -9,7 +9,7 @@
 		}
 	}
 
-	._c-hamburger-btn {
+	.#{$bs-prefix}c-hamburger-btn {
 		position: absolute;
 		top: ($bs-base-line-height / 2);
 		right: ($bs-base-line-height / 2);
