@@ -1,17 +1,17 @@
 .#{$bs-prefix}l-header {
-	position: relative;
-	padding: ($bs-base-line-height * 2) 0;
-	text-align: center;
+  position: relative;
+  padding: ($bs-base-line-height * 2) 0;
+  text-align: center;
 
-	.p-site-branding {
-		@include bs-bp-lg-only() {
-			margin-bottom: $bs-base-line-height;
-		}
-	}
+  .p-site-branding {
+    @include bs-bp-lg-only() {
+      margin-bottom: $bs-base-line-height;
+    }
+  }
 
-	.#{$bs-prefix}c-hamburger-btn {
-		position: absolute;
-		top: ($bs-base-line-height / 2);
-		right: ($bs-base-line-height / 2);
-	}
+  .#{$bs-prefix}c-hamburger-btn {
+    position: absolute;
+    top: ($bs-base-line-height / 2);
+    right: ($bs-base-line-height / 2);
+  }
 }
