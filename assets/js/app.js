@@ -26,6 +26,9 @@ var BasisDrawer = function () {
 		if (!this.params.btn) {
 			this.params.btn = '._c-drawer__btn';
 		}
+		if (!this.params.toggleSubmenus) {
+			this.params.toggleSubmenus = '._c-drawer__toggle';
+		}
 
 		this.container = document.querySelectorAll(container);
 		this.setListener();
@@ -43,6 +46,7 @@ var BasisDrawer = function () {
 
 				container.addEventListener('click', function (event) {
 					_this.close(drawer);
+					btn.classList.remove('is-close');
 				}, false);
 
 				drawer.addEventListener('click', function (event) {
@@ -50,7 +54,7 @@ var BasisDrawer = function () {
 				}, false);
 
 				btn.addEventListener('click', function (event) {
-					_this.toggle(drawer);
+					_this.toggleDrawer(drawer);
 					event.stopPropagation();
 				}, false);
 
@@ -61,15 +65,11 @@ var BasisDrawer = function () {
 				var has_submenus = drawer.querySelectorAll('[aria-expanded]');
 
 				var _loop2 = function _loop2(_i) {
-					var element = has_submenus[_i].children;
-					for (var j = 0; j < element.length; j++) {
-						if (element[j].tagName.toUpperCase() == 'A') {
-							element[j].addEventListener('click', function (event) {
-								_this.toggle(has_submenus[_i]);
-								event.stopPropagation();
-							}, false);
-						}
-					}
+					var toggleSubmenus = has_submenus[_i].querySelector(_this.params.toggleSubmenus);
+					toggleSubmenus.addEventListener('click', function (event) {
+						_this.toggleSubmenus(has_submenus[_i]);
+						event.stopPropagation();
+					}, false);
 				};
 
 				for (var _i = 0; _i < has_submenus.length; _i++) {
@@ -82,19 +82,35 @@ var BasisDrawer = function () {
 			}
 		}
 	}, {
-		key: 'toggle',
-		value: function toggle(drawer) {
+		key: 'toggleDrawer',
+		value: function toggleDrawer(drawer) {
 			event.preventDefault();
-			var btn = container.querySelector(this.params.btn);
-			if (drawer.getAttribute('aria-expanded') === 'false') {
-				this.open(drawer);
-				btn.classList.add('is-close');
+			for (var i = 0; i < this.container.length; i++) {
+				var _btn = this.container[i].querySelector(this.params.btn);
+				if (drawer.getAttribute('aria-expanded') === 'false') {
+					this.open(drawer);
+					_btn.classList.add('is-close');
+				} else {
+					this.close(drawer);
+					_btn.classList.remove('is-close');
+					var _has_submenus = drawer.querySelectorAll('[aria-expanded]');
+					for (var _i2 = 0; _i2 < _has_submenus.length; _i2++) {
+						this.close(_has_submenus[_i2]);
+					}
+				}
+			}
+		}
+	}, {
+		key: 'toggleSubmenus',
+		value: function toggleSubmenus(submenus) {
+			event.preventDefault();
+			if (submenus.getAttribute('aria-expanded') === 'false') {
+				this.open(submenus);
 			} else {
-				this.close(drawer);
-				btn.classList.remove('is-close');
-				var _has_submenus = drawer.querySelectorAll('[aria-expanded]');
-				for (var i = 0; i < _has_submenus.length; i++) {
-					this.close(_has_submenus[i]);
+				this.close(submenus);
+				var _has_submenus2 = submenus.querySelectorAll('[aria-expanded]');
+				for (var i = 0; i < _has_submenus2.length; i++) {
+					this.close(_has_submenus2[i]);
 				}
 			}
 		}
