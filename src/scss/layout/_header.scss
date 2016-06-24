@@ -13,5 +13,9 @@
     position: absolute;
     top: ($bs-base-line-height / 2);
     right: ($bs-base-line-height / 2);
+
+    @include bs-bp-md-min() {
+      right: $bs-base-line-height;
+    }
   }
 }
